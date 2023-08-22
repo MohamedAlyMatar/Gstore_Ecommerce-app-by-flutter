@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gstore/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
 import 'home.dart';
 

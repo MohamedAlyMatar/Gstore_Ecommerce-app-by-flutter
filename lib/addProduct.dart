@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 
-import 'classes.dart'; // Import your Product class
+import 'ClassProduct.dart'; // Import your Product class
 
 class addProduct extends StatefulWidget {
   @override

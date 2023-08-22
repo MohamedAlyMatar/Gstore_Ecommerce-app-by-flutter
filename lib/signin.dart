@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gstore/market.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'auth.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gstore/addProduct.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 
 class AdminControls extends StatefulWidget {
   AdminControls({Key? key}) : super(key: key);

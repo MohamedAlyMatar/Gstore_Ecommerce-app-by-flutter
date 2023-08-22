@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gstore/products.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/ProductCard.dart';
+import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
 
 class favorites extends StatelessWidget {

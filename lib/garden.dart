@@ -1,10 +1,10 @@
 import 'package:gstore/BucketScreen.dart';
-import 'package:gstore/products.dart';
+import 'package:gstore/ProductCard.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
-import 'classes.dart';
+import 'ClassProduct.dart';
 
 class garden extends StatefulWidget {
   garden({Key? key}) : super(key: key);

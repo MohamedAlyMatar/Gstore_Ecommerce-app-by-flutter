@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 
-import 'classes.dart';
+import 'ClassProduct.dart';
 
 class description extends StatefulWidget {
   final Product product;

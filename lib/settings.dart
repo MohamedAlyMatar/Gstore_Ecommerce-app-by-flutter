@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 
 class settings extends StatefulWidget {
   settings({Key? key}) : super(key: key);

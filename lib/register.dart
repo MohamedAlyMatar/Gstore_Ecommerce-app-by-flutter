@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 
 import 'auth.dart';
 import 'market.dart';

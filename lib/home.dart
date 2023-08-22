@@ -6,7 +6,7 @@ import 'package:gstore/register.dart';
 import 'package:gstore/settings.dart';
 import 'package:gstore/signin.dart';
 import 'package:flutter/material.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 import 'auth.dart';
 import 'garden.dart';
 

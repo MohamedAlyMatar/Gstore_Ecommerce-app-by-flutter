@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:gstore/util.dart';
+import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
-import './classes.dart';
+import './ClassProduct.dart';
 import 'description.dart';
 
 class productCard extends StatefulWidget {
