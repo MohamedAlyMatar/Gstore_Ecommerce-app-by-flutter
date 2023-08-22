@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gstore/addProduct.dart';
 import 'package:gstore/classes.dart';
 
+import 'ProductDelete.dart';
+
 class AdminControls extends StatefulWidget {
   AdminControls({Key? key}) : super(key: key);
 
@@ -75,8 +77,8 @@ class _AdminControlsState extends State<AdminControls> {
                                 trailing: Icon(Icons.delete_forever),
                               ),
                               onTap: () {
-                                // Navigator.of(context).push(MaterialPageRoute(
-                                //     builder: (context) => addProduct()));
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ProductDelete()));
                               },
                             ),
                           ),

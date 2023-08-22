@@ -76,7 +76,7 @@ class _gardenState extends State<garden> {
             onPressed: () {},
             backgroundColor: MyColors.LightAccentColor,
             child: badges.Badge(
-              badgeContent:  Text('${bucket.totalCount}', style: TextStyle(color: Colors.white),),
+              badgeContent:  Text('${bucket.totalCount.toInt()}', style: TextStyle(color: Colors.white),),
               badgeStyle:
                   const badges.BadgeStyle(shape: badges.BadgeShape.circle),
               child: IconButton(

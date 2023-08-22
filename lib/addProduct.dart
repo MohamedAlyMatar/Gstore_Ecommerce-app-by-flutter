@@ -26,7 +26,7 @@ class _addProductState extends State<addProduct> {
         'imgURL': product.imgURL,
         'name': product.name,
         'category': product.category,
-        'price': product.price,
+        'price': product.price.toDouble(),
         'rate': product.rate,
         'isFavorite': product.isFavorite,
         'count': product.count,

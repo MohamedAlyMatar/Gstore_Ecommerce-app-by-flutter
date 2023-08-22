@@ -39,8 +39,8 @@ Future<void> fetchProductsFromFirestore() async {
         imgURL: productData['imgURL'],
         name: productData['name'],
         category: productData['category'],
-        price: productData['price'],
-        rate: productData['rate'],
+        price: productData['price'].toDouble(),
+        rate: productData['rate'].toDouble(),
         isFavorite: productData['isFavorite'],
         count: productData['count'],
       );

@@ -96,11 +96,6 @@ class _productCardState extends State<productCard> {
                     child: IconButton(
                         onPressed: () {
                           setState(() {
-                            // if (widget.isFavorite) {
-                            //   favorites.addToFavorites(widget.p);
-                            // } else {
-                            //   favorites.addToFavorites(widget.p);
-                            // }
                             if (widget.isFavorite) {
                               favorites.removeFromFavorites(widget.p);
                             } else {
