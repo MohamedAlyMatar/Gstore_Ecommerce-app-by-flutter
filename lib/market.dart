@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:gstore/AdminControls.dart';
+import 'package:gstore/addProduct.dart';
 import 'package:gstore/favorites.dart';
 import 'package:gstore/profile.dart';
 import 'package:gstore/settings.dart';
@@ -119,7 +121,6 @@ class _marketState extends State<market> {
                     ),
                   ),
                 ),
-                const Divider(),
                 InkWell(
                   child: const ListTile(
                     leading: SizedBox(),
@@ -145,6 +146,21 @@ class _marketState extends State<market> {
                     );
                   },
                 ),
+                const Divider(),
+                user?.uid == "RIGw9i6U0jXGRqUpdmvHYWLeKkl2" ?
+                InkWell(
+                  child: const ListTile(
+                    leading: SizedBox(),
+                    title: Text("Admin Controls"),
+                    trailing: Icon(Icons.admin_panel_settings_rounded),
+                  ),
+                  onTap: () {
+                    Navigator.of(drawerContext).push(
+                      MaterialPageRoute(builder: (context) => AdminControls()),
+                    );
+                  },
+                )
+                : const Divider()
               ],
             ),
           ),

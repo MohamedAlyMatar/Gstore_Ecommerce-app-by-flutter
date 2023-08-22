@@ -33,6 +33,7 @@ class _gardenState extends State<garden> {
   @override
   Widget build(BuildContext context) {
     final bucket = Provider.of<Bucket>(context);
+    fetchProductsFromFirestore();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SafeArea(

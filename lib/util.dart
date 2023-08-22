@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/foundation.dart';
@@ -52,11 +53,26 @@ class Bucket extends ChangeNotifier {
     return _productCountMap[productId] ?? 0;
   }
 
-  void addToBucket(Product product) {
+  Future<void> addToBucket(Product product) async {
     if (product.count == 0) {
       _products.add(product);
     }
-    product.count++;
+    int newCount = product.count++;
+    try {
+      // Update the count in Firestore
+      await FirebaseFirestore.instance
+          .collection('products')
+          .doc(product.productID)
+          .update({'count': newCount});
+
+      // Update the count in the local list (allItems)
+      final index = allItems.indexWhere((p) => p.productID == product.productID);
+      if (index != -1) {
+        allItems[index].count = newCount;
+      }
+    } catch (e) {
+      print('Error updating product count: $e');
+    }
     totalCount++;
     total += (product.price); // Increment the count for the added product
     notifyListeners();

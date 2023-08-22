@@ -21,7 +21,6 @@ class BucketScreen extends StatelessWidget {
         itemCount: bucket.products.length,
         itemBuilder: (context, index) {
           final product = bucket.products[index];
-          final count = bucket.getProductCount(product.id);
           return Card(
             child: ListTile(
               leading: Image.network(

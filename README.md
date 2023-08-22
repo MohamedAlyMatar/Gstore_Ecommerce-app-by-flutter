@@ -5,6 +5,7 @@
 ### It's basically an e-commerce application for all Google's products and accssories
 
 ## The Application includes the following
+
 <ul>
 <li>An icon for the app</li>
 <li>dark mode (to be done)</li>
