@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gstore/addProduct.dart';
+import 'package:gstore/ProductList.dart';
+import 'package:gstore/ProductAdd.dart';
 import 'package:gstore/classes.dart';
 
 import 'ProductDelete.dart';
@@ -45,8 +46,25 @@ class _AdminControlsState extends State<AdminControls> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Image.asset("assets/logos/cogwheel.png",
+                            child: Image.asset("assets/logos/user.png",
                                 height: 150, width: 150),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: InkWell(
+                              child: const ListTile(
+                                // leading: SizedBox(),
+                                title: Text(
+                                  "View Products",
+                                  style: TextStyle(color: Colors.black87),
+                                ),
+                                trailing: Icon(Icons.list),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => ProductList()));
+                              },
+                            ),
                           ),
                           Padding(
                             padding: EdgeInsets.all(8.0),

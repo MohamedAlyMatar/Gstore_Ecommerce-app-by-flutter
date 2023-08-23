@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gstore/classes.dart';
 
-import 'ClassProduct.dart'; // Import your Product class
+import 'ProductClass.dart'; // Import your Product class
 
 class addProduct extends StatefulWidget {
   @override
@@ -111,25 +111,6 @@ class _addProductState extends State<addProduct> {
             ElevatedButton(
               onPressed: _addProduct,
               child: Text('Add Product'),
-            ),
-            SizedBox(height: 32.0),
-            const Text(
-              'Product List',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16.0),
-            // Display the list of products
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: allItems.length,
-              itemBuilder: (context, index) {
-                Product product = allItems[index];
-                return ListTile(
-                  title: Text(product.name),
-                  subtitle: Text('ID: ${product.productID}'),
-                  // Add more details as needed
-                );
-              },
             ),
           ],
         ),

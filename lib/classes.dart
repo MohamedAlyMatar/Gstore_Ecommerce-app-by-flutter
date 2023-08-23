@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gstore/ClassProduct.dart';
+import 'package:gstore/ProductClass.dart';
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -66,7 +66,7 @@ class Bucket extends ChangeNotifier {
           .update({'count': newCount});
 
       // Update the count in the local list (allItems)
-      final index = allItems.indexWhere((p) => p.productID == product.productID);
+      final index = allItems.indexWhere((p) => p.productID.trim() == product.productID.trim());
       if (index != -1) {
         allItems[index].count = newCount;
       }

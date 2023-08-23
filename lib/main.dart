@@ -1,15 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gstore/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
+import 'auth.dart';
 import 'home.dart';
+import 'market.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final User? user = Auth().currentUser;
   runApp(
     MultiProvider(
       providers: [
@@ -20,7 +24,8 @@ void main() async {
           create: (_) => Bucket(),
         ),
       ],
-      child: home(), // Use your own app widget here
+      child: user != null ? market() : home(),
+      // child: home(),
     ),
   );
 }

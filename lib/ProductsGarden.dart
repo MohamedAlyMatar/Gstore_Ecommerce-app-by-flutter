@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
-import 'ClassProduct.dart';
+import 'ProductClass.dart';
 
 class garden extends StatefulWidget {
   garden({Key? key}) : super(key: key);

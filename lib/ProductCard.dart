@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:gstore/classes.dart';
 import 'package:provider/provider.dart';
-import './ClassProduct.dart';
+import './ProductClass.dart';
 import 'description.dart';
 
 class productCard extends StatefulWidget {
@@ -25,7 +25,7 @@ class _productCardState extends State<productCard> {
     return Card(
       child: SizedBox(
         width: 170,
-        height: 220,
+        height: 230,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -81,7 +81,7 @@ class _productCardState extends State<productCard> {
                   }
                 },
               ),
-              // const SizedBox(height: 5,),
+              const SizedBox(height: 7,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

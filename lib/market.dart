@@ -9,7 +9,7 @@ import 'package:gstore/settings.dart';
 import 'package:gstore/classes.dart';
 import 'about.dart';
 import 'auth.dart';
-import 'garden.dart';
+import 'ProductsGarden.dart';
 import 'help.dart';
 
 void main() => runApp(market());

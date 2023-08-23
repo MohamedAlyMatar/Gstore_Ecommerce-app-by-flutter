@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gstore/signin.dart';
 import 'package:gstore/classes.dart';
-
+import 'package:gstore/ProfileSettings.dart';
 import 'auth.dart';
 import 'home.dart';
 
@@ -38,11 +38,6 @@ class _profileState extends State<profile> {
   Future<void> signOut() async {
     await Auth().signOut();
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => home()));
-  }
-
-  Future<void> deleteUser() async {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => home()));
-    await Auth().deleteUserAndFirestoreData();
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -138,34 +133,25 @@ class _profileState extends State<profile> {
                           ),
                           child: const Text("Sign Out"),
                         ),
-                        const SizedBox(height: 20),
-                        ElevatedButton(
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) => AlertDialog(
-                                  title: const Text("Are you sure?"),
-                                  content:
-                                      const Text("This action can't be undone"),
-                                  actions: [
-                                    TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'Cancel'),
-                                        child: const Text("Cancel")),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                          deleteUser();
-                                        },
-                                        child: const Text("DELETE")),
-                                  ],
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red,
+                        const SizedBox(height: 30),
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: InkWell(
+                            child: const ListTile(
+                              // leading: ,
+                              title: Text(
+                                "Profile Settings",
+                                style: TextStyle(color: Colors.black87),
+                              ),
+                              trailing: Icon(Icons.settings_applications),
                             ),
-                            child: const Text("Delete Account")),
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ProfileSettings()));
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 20),
                       ],
                     )
                   : Column(

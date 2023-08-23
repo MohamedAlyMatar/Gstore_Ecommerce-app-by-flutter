@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:gstore/classes.dart';
+import 'package:gstore/widgets.dart';
 
 import 'auth.dart';
 import 'market.dart';
@@ -16,19 +14,9 @@ class register extends StatefulWidget {
 }
 
 class _register extends State<register> {
-  //////////////////////////////////////////////////////////////////////////////
+  MyWidgets w = MyWidgets();
 
-  void _showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM_RIGHT,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.grey[800],
-      textColor: Colors.white,
-      fontSize: 16.0,
-    );
-  }
+  //////////////////////////////////////////////////////////////////////////////
 
   String? errorMessage = '';
 
@@ -59,49 +47,18 @@ class _register extends State<register> {
         });
 
         // Navigate to the market page
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => market()));
-        _showToast("Registration Success");
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => market()));
+        w.showToast("Registration Success");
       } else {
         // Handle the case where the user object is null
-        _showToast("Registration failed: Unable to create user.");
+        w.showToast("Registration failed: Unable to create user.");
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
       });
     }
-  }
-
-  Widget _entryField(String title, String hint, bool isobsecure, Icon entryicon,
-      [TextEditingController? controller]) {
-    return TextField(
-      controller: controller,
-      obscureText: isobsecure,
-      decoration: InputDecoration(
-        border: UnderlineInputBorder(),
-        labelText: title,
-        hintText: hint,
-        prefixIcon: entryicon,
-      ),
-    );
-  }
-
-  Widget _errorMessage() {
-    return Text(errorMessage == "" ? "" : "Hmm ? $errorMessage");
-  }
-
-  Widget _submitButton() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        primary: MyColors.LightPrimaryColor,
-        onPrimary: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-        ),
-      ),
-      onPressed: createUserWithEmailAndPassword,
-      child: Text("Register"),
-    );
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -163,29 +120,29 @@ class _register extends State<register> {
                 ),
                 Padding(
                     padding: const EdgeInsets.all(10),
-                    child: _entryField("Enter your name", "Name", false,
+                    child: w.entryField2("Enter your name", "Name", false,
                         const Icon(Icons.face), _controllerUsername)),
                 Padding(
                     padding: const EdgeInsets.all(10),
-                    child: _entryField(
-                        "Enter your phone number",
-                        "phone number",
-                        false,
-                        const Icon(Icons.phone_android_rounded),
-                        _controllerPhoneNumber,
-                      )),
+                    child: w.entryField2(
+                      "Enter your phone number",
+                      "phone number",
+                      false,
+                      const Icon(Icons.phone_android_rounded),
+                      _controllerPhoneNumber,
+                    )),
                 Padding(
                     padding: const EdgeInsets.all(10),
-                    child: _entryField("Enter your email", "Email", false,
+                    child: w.entryField2("Enter your email", "Email", false,
                         const Icon(Icons.email), _controllerEmail)),
                 Padding(
                     padding: const EdgeInsets.all(10),
-                    child: _entryField("Enter your password", "password", true,
-                        const Icon(Icons.lock), _controllerPassword)),
+                    child: w.entryField2("Enter your password", "password",
+                        true, const Icon(Icons.lock), _controllerPassword)),
                 const SizedBox(
                   height: 10,
                 ),
-                _submitButton(),
+                w.submitButton("Sign-up", createUserWithEmailAndPassword),
               ],
             ),
           ),
