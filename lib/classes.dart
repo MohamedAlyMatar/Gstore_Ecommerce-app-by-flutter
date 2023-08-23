@@ -78,9 +78,24 @@ class Bucket extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFromBucket(Product product) {
+  Future<void> removeFromBucket(Product product) async {
     if (product.count > 0) {
-      product.count--;
+      int newCount = product.count--;
+      try {
+        // Update the count in Firestore
+        await FirebaseFirestore.instance
+            .collection('products')
+            .doc(product.productID)
+            .update({'count': newCount});
+
+        // Update the count in the local list (allItems)
+        final index = allItems.indexWhere((p) => p.productID.trim() == product.productID.trim());
+        if (index != -1) {
+          allItems[index].count = newCount;
+        }
+      } catch (e) {
+        print('Error updating product count: $e');
+      }
       totalCount--;
       total -= (product.price); // Decrement the count for the removed product
     } else {

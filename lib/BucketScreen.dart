@@ -3,6 +3,8 @@ import 'package:gstore/classes.dart';
 import 'package:gstore/payment.dart';
 import 'package:provider/provider.dart';
 
+import 'ProductClass.dart';
+
 class BucketScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class BucketScreen extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       bucket.removeFromBucket(product);
+                      fetchProductsFromFirestore();
                     },
                     icon: Icon(Icons.delete),
                   ),
@@ -49,7 +52,8 @@ class BucketScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: Container(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0), // Add padding
+        padding: EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+        // Add padding
         child: ElevatedButton(
           onPressed: () {
             // Navigate to the payment page
@@ -58,21 +62,24 @@ class BucketScreen extends StatelessWidget {
             ));
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.orange, // Match the button color with the background color
-            padding: EdgeInsets.symmetric(vertical: 12.0), // Adjust the vertical padding
+            primary: Colors.orange,
+            // Match the button color with the background color
+            padding: EdgeInsets.symmetric(vertical: 12.0),
+            // Adjust the vertical padding
             shape: StadiumBorder(), // Oval or rounded rectangular shape
           ),
-          child: Padding( 
-            padding:EdgeInsets.all(5),
+          child: Padding(
+            padding: EdgeInsets.all(5),
             child: Text(
-            '\$ ${bucket.total}', // Display the total cost
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: Colors.white, // Text color (usually white on colored backgrounds)
+              '\$ ${bucket.total}', // Display the total cost
+              style: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors
+                    .white, // Text color (usually white on colored backgrounds)
+              ),
             ),
           ),
-        ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

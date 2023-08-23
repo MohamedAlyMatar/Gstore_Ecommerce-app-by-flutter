@@ -18,12 +18,11 @@ class _paymentState extends State<payment> {
     final bucket = Provider.of<Bucket>(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SafeArea(
-            child: Scaffold(
+        home: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: MyColors.LightPrimaryColor,
+            backgroundColor: MyColors.LightAccentColor,
             leading: IconButton(
               icon: const Icon(IconData(0xe093,
                   fontFamily: 'MaterialIcons', matchTextDirection: true)),
@@ -105,6 +104,6 @@ class _paymentState extends State<payment> {
               ),
             ),
           ),
-        )));
+        ));
   }
 }

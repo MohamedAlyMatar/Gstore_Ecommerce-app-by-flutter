@@ -13,25 +13,24 @@ class _settingsState extends State<settings> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SafeArea(
-            child: Scaffold(
+        home: Scaffold(
           backgroundColor: Colors.white,
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: MyColors.LightPrimaryColor,
-                leading: IconButton(
-                  icon: const Icon(IconData(0xe093,
-                      fontFamily: 'MaterialIcons', matchTextDirection: true)),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                title: const Text(
-                  "Settings",
-                  style: TextStyle(color: Colors.white),
-                ),
-                centerTitle: true,
-              ),
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: MyColors.LightPrimaryColor,
+            leading: IconButton(
+              icon: const Icon(IconData(0xe093,
+                  fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            title: const Text(
+              "Settings",
+              style: TextStyle(color: Colors.white),
+            ),
+            centerTitle: true,
+          ),
           body: SafeArea(
             child: Center(
               child: Padding(
@@ -102,6 +101,6 @@ class _settingsState extends State<settings> {
               ),
             ),
           ),
-        )));
+        ));
   }
 }

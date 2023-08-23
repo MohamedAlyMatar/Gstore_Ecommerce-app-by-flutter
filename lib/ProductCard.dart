@@ -116,6 +116,7 @@ class _productCardState extends State<productCard> {
                         onPressed: () {
                           final bucket = Provider.of<Bucket>(context, listen: false);
                           bucket.addToBucket(widget.p);
+                          fetchProductsFromFirestore();
                         },
                         icon: const Icon(
                           Icons.add_shopping_cart_outlined,

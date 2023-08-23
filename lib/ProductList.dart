@@ -50,7 +50,7 @@ class _ProductListState extends State<ProductList> {
                   ),
                   onTap: () {
                     FlutterClipboard.copy(product.productID).then((value) {
-                      final snackBar = SnackBar(
+                      const snackBar =  SnackBar(
                         content: Text('Product ID copied to clipboard'),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);

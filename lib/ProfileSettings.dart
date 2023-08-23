@@ -27,8 +27,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SafeArea(
-            child: Scaffold(
+        home: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             elevation: 0,
@@ -123,6 +122,6 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               ),
             ),
           ),
-        )));
+        ));
   }
 }
