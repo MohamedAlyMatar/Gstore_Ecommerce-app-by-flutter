@@ -3,6 +3,8 @@ import 'package:gstore/ProductCard.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 import 'ProductClass.dart';
 
@@ -35,10 +37,14 @@ class _gardenState extends State<garden> {
     fetchProductsFromFirestore();
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        color: Theme.of(context).colorScheme.background,
         home: SafeArea(
           child: Scaffold(
             body: Container(
-              // color: MyColors.LightBackgroundColor,
+              color: Theme.of(context).colorScheme.background,
               child: SingleChildScrollView(
                 child: Center(
                   child: Wrap(
@@ -90,7 +96,7 @@ class _gardenState extends State<garden> {
                         _createPageRoute(),
                       );
                     },
-                    icon: const Icon(Icons.shopping_bag)),
+                    icon: Icon(Icons.shopping_bag, color: Colors.white,)),
               ),
             ),
           ),

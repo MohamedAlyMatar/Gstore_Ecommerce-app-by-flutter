@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 
 class ProductDelete extends StatefulWidget {
   @override
@@ -52,33 +54,56 @@ class _ProductDeleteState extends State<ProductDelete> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: MyColors.LightPrimaryColor,
-        title: const Text('Delete Products'),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: productIdController,
-              decoration: InputDecoration(labelText: 'Product ID to Delete'),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        home: Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            leading: IconButton(
+              icon: Icon(
+                IconData(0xe093,
+                    fontFamily: 'MaterialIcons', matchTextDirection: true),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               onPressed: () {
-                String productIdToDelete = productIdController.text;
-                // Call the function to delete the product using the entered ID
-                deleteProductFromFirestore(productIdToDelete);
+                Navigator.of(context).pop();
               },
-              child: Text('Delete Product'),
             ),
-          ],
-        ),
-      ),
-    );
+            title: Text(
+              'Delete Products',
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                TextField(
+                  controller: productIdController,
+                  decoration:
+                      InputDecoration(labelText: 'Product ID to Delete'),
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () {
+                    String productIdToDelete = productIdController.text;
+                    // Call the function to delete the product using the entered ID
+                    deleteProductFromFirestore(productIdToDelete);
+                  },
+                  child: Text(
+                    'Delete Product',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }

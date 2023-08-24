@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gstore/signin.dart';
 import 'package:gstore/classes.dart';
 import 'package:gstore/ProfileSettings.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'auth.dart';
 import 'home.dart';
 
@@ -44,13 +46,13 @@ class _profileState extends State<profile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Profile"),
-        backgroundColor: MyColors.LightPrimaryColor,
-        centerTitle: true,
-      ),
-      body: Center(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
+      color: Theme.of(context).colorScheme.background,
+      home: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -61,7 +63,7 @@ class _profileState extends State<profile> {
                   ? Column(
                       children: <Widget>[
                         Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: Stack(
                               children: [
                                 CircleAvatar(
@@ -106,44 +108,51 @@ class _profileState extends State<profile> {
                                 ),
                               ],
                             )),
-                        const Text("Welcome!"),
-                        Text("${user?.displayName}"),
+                        Text("Welcome!", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                            decoration: TextDecoration.none),),
+                        Text("${user?.displayName}", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                            decoration: TextDecoration.none),),
                         FutureBuilder<String?>(
                           future: fetchPhoneNumber(),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return Text("Phone Number: Loading...");
+                              return Text("Phone Number: Loading...", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                                  decoration: TextDecoration.none),);
                             } else if (snapshot.hasError) {
-                              return Text("Phone Number: Error");
+                              return Text("Phone Number: Error", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                                  decoration: TextDecoration.none),);
                             } else {
                               final phoneNumber = snapshot.data ?? 'N/A';
-                              return Text("Phone Number: $phoneNumber");
+                              return Text("Phone Number: $phoneNumber", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                                  decoration: TextDecoration.none),);
                             }
                           },
                         ),
-                        Text("Email: ${user?.email}"),
+                        Text("Email: ${user?.email}", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                            decoration: TextDecoration.none),),
                         const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
                             signOut();
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: MyColors.LightPrimaryColor,
+                            backgroundColor: Theme.of(context).colorScheme.primary,
                           ),
-                          child: const Text("Sign Out"),
+                          child: Text("Sign-Out", style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
                         ),
                         const SizedBox(height: 30),
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: InkWell(
-                            child: const ListTile(
+                            child: ListTile(
                               // leading: ,
+                              tileColor: Theme.of(context).colorScheme.primary,
                               title: Text(
                                 "Profile Settings",
-                                style: TextStyle(color: Colors.black87),
+                                style: TextStyle(color: Theme.of(context).colorScheme.secondary,),
                               ),
-                              trailing: Icon(Icons.settings_applications),
+                              trailing: Icon(Icons.settings_applications, color: Theme.of(context).colorScheme.secondary,),
                             ),
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
@@ -156,20 +165,20 @@ class _profileState extends State<profile> {
                     )
                   : Column(
                       children: <Widget>[
-                        const Text("Guest"), // Display "Guest" if not logged in
+                        Text("Guest", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 15,
+                            decoration: TextDecoration.none),), // Display "Guest" if not logged in
                         const SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: () {
-                            // Navigate to the sign-in page
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => home()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: MyColors.LightPrimaryColor,
+                            backgroundColor: Theme.of(context).colorScheme.primary,
                           ),
-                          child: const Text("Sign In"),
+                          child: Text("Sign In", style: TextStyle(color: Theme.of(context).colorScheme.secondary),),
                         ),
                       ],
                     ),

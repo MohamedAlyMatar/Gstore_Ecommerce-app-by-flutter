@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'package:gstore/widgets.dart';
 
 import 'auth.dart';
@@ -67,6 +69,9 @@ class _register extends State<register> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: Center(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -118,31 +123,60 @@ class _register extends State<register> {
                     ],
                   ),
                 ),
-                Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: w.entryField2("Enter your name", "Name", false,
-                        const Icon(Icons.face), _controllerUsername)),
-                Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: w.entryField2(
+                Builder(
+                  builder: (BuildContext context) {
+                    return w.entryField2(
+                        Theme.of(context).colorScheme,
+                        "Enter your name",
+                        "Name",
+                        false,
+                        const Icon(Icons.face),
+                        _controllerUsername);
+                  },
+                ),
+                Builder(
+                  builder: (BuildContext context) {
+                    return w.entryField2(
+                      Theme.of(context).colorScheme,
                       "Enter your phone number",
                       "phone number",
                       false,
                       const Icon(Icons.phone_android_rounded),
                       _controllerPhoneNumber,
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: w.entryField2("Enter your email", "Email", false,
-                        const Icon(Icons.email), _controllerEmail)),
-                Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: w.entryField2("Enter your password", "password",
-                        true, const Icon(Icons.lock), _controllerPassword)),
+                    );
+                  },
+                ),
+                Builder(
+                  builder: (BuildContext context) {
+                    return w.entryField2(
+                        Theme.of(context).colorScheme,
+                        "Enter your email",
+                        "Email",
+                        false,
+                        const Icon(Icons.email),
+                        _controllerEmail);
+                  },
+                ),
+                Builder(
+                  builder: (BuildContext context) {
+                    return w.entryField2(
+                        Theme.of(context).colorScheme,
+                        "Enter your password",
+                        "password",
+                        true,
+                        const Icon(Icons.lock),
+                        _controllerPassword);
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                w.submitButton("Sign-up", createUserWithEmailAndPassword),
+                Builder(
+                  builder: (BuildContext context) {
+                    return w.submitButton(Theme.of(context).colorScheme,
+                        "Sign-up", createUserWithEmailAndPassword);
+                  },
+                )
               ],
             ),
           ),

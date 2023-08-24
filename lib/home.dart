@@ -7,6 +7,9 @@ import 'package:gstore/settings.dart';
 import 'package:gstore/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
+import 'ProductClass.dart';
 import 'auth.dart';
 import 'ProductsGarden.dart';
 
@@ -19,144 +22,127 @@ class home extends StatefulWidget {
 
 class _homeState extends State<home> {
   final User? user = Auth().currentUser;
-
   @override
   Widget build(BuildContext context) {
+    fetchProductsFromFirestore();
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: DefaultTabController(
-            length: 2,
-            child: Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: MyColors.LightPrimaryColor,
-                // title: MyText("G-Store", MyColors.LightText, 25.0),
-                title: const Text("G-Store",
-                    style: TextStyle(color: Colors.white)),
-                centerTitle: true,
-
-                bottom: const TabBar(
-                  tabs: [
-                    Tab(
-                      icon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            IconData(0xe3b2,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true),
-                            color: Colors.white,
-                          ),
-                          Text(
-                            'Sign In',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      icon: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            IconData(0xe08c,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true),
-                            color: Colors.white,
-                          ),
-                          Text(
-                            'Register',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              drawer: SafeArea(
-                  child: Builder(
-                builder: (BuildContext drawerContext) => Drawer(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+      debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
+      home: DefaultTabController(
+        length: 2,
+        child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          appBar: AppBar(
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            title: Text("G-Store",
+                style:
+                    TextStyle(color: Theme.of(context).colorScheme.secondary)),
+            centerTitle: true,
+            bottom: TabBar(
+              tabs: [
+                Tab(
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        height: 120,
-                        color: MyColors.LightPrimaryColor,
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: InkWell(
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 40,
-                                  backgroundColor: Colors.grey.shade200,
-                                  child: const CircleAvatar(
-                                    radius: 37,
-                                    backgroundImage:
-                                        AssetImage('assets/logos/fin.png'),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    user != null
-                                        ? Text("${user?.displayName}")
-                                        : const Text(
-                                            "Finn The Manager",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 17),
-                                          ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                      Icon(
+                        IconData(0xe3b2,
+                            fontFamily: 'MaterialIcons',
+                            matchTextDirection: true),
+                        color: Theme.of(context).colorScheme.secondary,
                       ),
-                      const Divider(),
-                      InkWell(
-                        child: const ListTile(
-                          leading: SizedBox(),
-                          title: Text("Settings"),
-                          trailing: Icon(Icons.settings),
-                        ),
-                        onTap: () {
-                          Navigator.of(drawerContext).push(
-                            MaterialPageRoute(builder: (context) => settings()),
-                          );
-                        },
-                      ),
-                      const Divider(),
-                      InkWell(
-                        child: const ListTile(
-                          leading: SizedBox(),
-                          title: Text("About"),
-                          trailing: Icon(Icons.question_mark),
-                        ),
-                        onTap: () {
-                          Navigator.of(drawerContext).push(
-                            MaterialPageRoute(builder: (context) => about()),
-                          );
-                        },
+                      Text(
+                        'Sign In',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
                       ),
                     ],
                   ),
                 ),
-              )),
-              body: TabBarView(
+                Tab(
+                  icon: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        IconData(0xe08c,
+                            fontFamily: 'MaterialIcons',
+                            matchTextDirection: true),
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                      Text(
+                        'Register',
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          drawer: Drawer(
+            child: Container(
+              color: Theme.of(context).colorScheme.background,
+              // Change the background color of the entire drawer
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  signIn(),
-                  register(),
+                  UserAccountsDrawerHeader(
+                    accountName: user != null
+                        ? Text("${user?.displayName}")
+                        : Text("Finn The Manager"),
+                    accountEmail: user != null
+                        ? Text("${user?.email}")
+                        : Text("finn@gstore.com"),
+                    // You can provide an email address here if needed
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.grey.shade300,
+                      child: CircleAvatar(
+                        radius: 37,
+                        backgroundImage: AssetImage('assets/logos/fin.png'),
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .primary, // Change the background color of the header
+                    ),
+                  ),
+                  ListTile(
+                    // tileColor: Theme.of(context).colorScheme.secondary,
+                    leading: Icon(Icons.settings, color:Theme.of(context).colorScheme.tertiary),
+                    title: Text("Settings", style: TextStyle(color: Theme.of(context).colorScheme.tertiary),),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => settings()),
+                      );
+                    },
+                  ),
+                  Divider(),
+                  ListTile(
+                    // tileColor: Theme.of(context).colorScheme.secondary,
+                    leading: Icon(Icons.question_mark, color:Theme.of(context).colorScheme.tertiary),
+                    title: Text("About", style: TextStyle(color: Theme.of(context).colorScheme.tertiary),),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => about()),
+                      );
+                    },
+                  ),
                 ],
               ),
-            )));
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              signIn(),
+              register(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

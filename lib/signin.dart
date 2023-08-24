@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:gstore/market.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'auth.dart';
 import 'widgets.dart';
 
@@ -63,6 +65,9 @@ class _signInState extends State<signIn> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: Center(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -77,38 +82,54 @@ class _signInState extends State<signIn> {
                       padding: const EdgeInsets.all(10),
                       child: Column(
                         children: <Widget>[
-                          Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: w.entryField1(
+                          Builder(
+                            builder: (BuildContext context) {
+                              return w.entryField1(
                                   "Username",
                                   "Enter your name",
                                   false,
                                   _controllerEmail,
-                                  const Icon(Icons.email))),
-                          Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: w.entryField1(
-                                  "Password",
-                                  "Enter your password",
-                                  true,
-                                  _controllerPassword,
-                                  const Icon(Icons.lock_outline_rounded))),
-                          Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: w.submitButton(
-                                "Sign-in", signInWithEmailAndPassword),
+                                  const Icon(Icons.email),
+                                  Theme.of(context).colorScheme);
+                            },
                           ),
-                          const Padding(
+                          Builder(
+                            builder: (BuildContext context) {
+                              return w.entryField1(
+                                "Password",
+                                "Enter your password",
+                                true,
+                                _controllerPassword,
+                                const Icon(Icons.lock_outline_rounded),
+                                Theme.of(context).colorScheme,
+                              );
+                            },
+                          ),
+                          Builder(
+                            builder: (BuildContext context) {
+                              return w.submitButton(
+                                  Theme.of(context).colorScheme,
+                                  "Sign-in",
+                                  signInWithEmailAndPassword);
+                            },
+                          ),
+                          Padding(
                             padding: EdgeInsets.all(25),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  "No account? ",
-                                  style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 15,
-                                      decoration: TextDecoration.none),
+                                Builder(
+                                  builder: (BuildContext context) {
+                                    return Text(
+                                      "No account? ",
+                                      style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
+                                          fontSize: 15,
+                                          decoration: TextDecoration.none),
+                                    );
+                                  },
                                 ),
                                 Text(
                                   "Swipe to register",

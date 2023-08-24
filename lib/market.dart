@@ -7,6 +7,8 @@ import 'package:gstore/favorites.dart';
 import 'package:gstore/profile.dart';
 import 'package:gstore/settings.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'about.dart';
 import 'auth.dart';
 import 'ProductsGarden.dart';
@@ -29,21 +31,8 @@ class _marketState extends State<market> {
 
   PageController controller = PageController();
 
-  List<Color> colors = [
-    Colors.purple,
-    Colors.pink,
-    Colors.amber[600]!,
-    Colors.teal
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   final List<Widget> screens = [
     garden(),
-    // BucketScreen(),
     favorites(),
     profile(),
   ];
@@ -52,14 +41,18 @@ class _marketState extends State<market> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         extendBody: true,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: MyColors.LightPrimaryColor,
-          title: const Text(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          title: Text(
             "Enjoy The Quality",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary),
           ),
           centerTitle: true,
           actions: [
@@ -68,94 +61,81 @@ class _marketState extends State<market> {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) => help()));
                 },
-                icon: const Icon(Icons.question_mark))
+                icon: Icon(Icons.question_mark, color: Theme.of(context).colorScheme.secondary,))
           ],
         ),
-        drawer: SafeArea(
-            child: Builder(
-          builder: (BuildContext drawerContext) => Drawer(
+        drawer: Drawer(
+          child: Container(
+            color: Theme.of(context).colorScheme.background,
+            // Change the background color of the entire drawer
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  height: 120,
-                  color: MyColors.LightPrimaryColor,
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: InkWell(
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 40,
-                            backgroundColor: Colors.grey.shade200,
-                            child: const CircleAvatar(
-                              radius: 37,
-                              backgroundImage:
-                                  AssetImage('assets/logos/fin.png'),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              user != null
-                                  ? Text(
-                                      "${user?.displayName}",
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 17),
-                                    )
-                                  : const Text(
-                                      "Finn The Manager",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 17),
-                                    ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
+                UserAccountsDrawerHeader(
+                  accountName: user != null
+                      ? Text("${user?.displayName}")
+                      : Text("Finn The Manager"),
+                  accountEmail: user != null
+                      ? Text("${user?.email}")
+                      : Text("finn@gstore.com"),
+                  // You can provide an email address here if needed
+                  currentAccountPicture: CircleAvatar(
+                    backgroundColor: Colors.grey.shade300,
+                    child: CircleAvatar(
+                      radius: 37,
+                      backgroundImage: AssetImage('assets/logos/fin.png'),
                     ),
                   ),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context)
+                        .colorScheme
+                        .primary, // Change the background color of the header
+                  ),
                 ),
-                InkWell(
-                  child: const ListTile(
-                    leading: SizedBox(),
-                    title: Text("Settings"),
-                    trailing: Icon(Icons.settings),
+                ListTile(
+                  // tileColor: Theme.of(context).colorScheme.secondary,
+                  leading: Icon(Icons.settings,
+                      color: Theme.of(context).colorScheme.tertiary),
+                  title: Text(
+                    "Settings",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
                   ),
                   onTap: () {
-                    Navigator.of(drawerContext).push(
+                    Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => settings()),
                     );
                   },
                 ),
-                const Divider(),
-                InkWell(
-                  child: const ListTile(
-                    leading: SizedBox(),
-                    title: Text("About"),
-                    trailing: Icon(Icons.info),
+                Divider(),
+                ListTile(
+                  // tileColor: Theme.of(context).colorScheme.secondary,
+                  leading: Icon(Icons.question_mark,
+                      color: Theme.of(context).colorScheme.tertiary),
+                  title: Text(
+                    "About",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
                   ),
                   onTap: () {
-                    Navigator.of(drawerContext).push(
+                    Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => about()),
                     );
                   },
                 ),
                 const Divider(),
                 user?.uid == "RIGw9i6U0jXGRqUpdmvHYWLeKkl2"
-                    ? InkWell(
-                        child: const ListTile(
-                          leading: SizedBox(),
-                          title: Text("Admin Controls"),
-                          trailing: Icon(Icons.admin_panel_settings_rounded),
+                    ? ListTile(
+                        // tileColor: Theme.of(context).colorScheme.secondary,
+                        leading: Icon(Icons.admin_panel_settings_rounded,
+                            color: Theme.of(context).colorScheme.tertiary),
+                        title: Text(
+                          "Admin Controls",
+                          style: TextStyle(
+                              color: Theme.of(context).colorScheme.tertiary),
                         ),
                         onTap: () {
-                          Navigator.of(drawerContext).push(
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                                 builder: (context) => AdminControls()),
                           );
@@ -165,7 +145,102 @@ class _marketState extends State<market> {
               ],
             ),
           ),
-        )),
+        ),
+        // drawer: SafeArea(
+        //     child: Builder(
+        //   builder: (BuildContext drawerContext) => Drawer(
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.start,
+        //       children: [
+        //         Container(
+        //           height: 120,
+        //           color: Theme.of(context).colorScheme.primary,
+        //           child: Padding(
+        //             padding: const EdgeInsets.all(5.0),
+        //             child: InkWell(
+        //               child: Row(
+        //                 children: [
+        //                   CircleAvatar(
+        //                     radius: 40,
+        //                     backgroundColor: Colors.grey.shade200,
+        //                     child: const CircleAvatar(
+        //                       radius: 37,
+        //                       backgroundImage:
+        //                           AssetImage('assets/logos/fin.png'),
+        //                     ),
+        //                   ),
+        //                   const SizedBox(
+        //                     width: 10,
+        //                   ),
+        //                   Column(
+        //                     mainAxisAlignment: MainAxisAlignment.center,
+        //                     children: [
+        //                       user != null
+        //                           ? Text(
+        //                               "${user?.displayName}",
+        //                               style: const TextStyle(
+        //                                   color: Colors.white, fontSize: 17),
+        //                             )
+        //                           : const Text(
+        //                               "Finn The Manager",
+        //                               style: TextStyle(
+        //                                   color: Colors.white, fontSize: 17),
+        //                             ),
+        //                       const SizedBox(
+        //                         width: 10,
+        //                       ),
+        //                     ],
+        //                   )
+        //                 ],
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //         InkWell(
+        //           child: const ListTile(
+        //             leading: SizedBox(),
+        //             title: Text("Settings"),
+        //             trailing: Icon(Icons.settings),
+        //           ),
+        //           onTap: () {
+        //             Navigator.of(drawerContext).push(
+        //               MaterialPageRoute(builder: (context) => settings()),
+        //             );
+        //           },
+        //         ),
+        //         const Divider(),
+        //         InkWell(
+        //           child: const ListTile(
+        //             leading: SizedBox(),
+        //             title: Text("About"),
+        //             trailing: Icon(Icons.info),
+        //           ),
+        //           onTap: () {
+        //             Navigator.of(drawerContext).push(
+        //               MaterialPageRoute(builder: (context) => about()),
+        //             );
+        //           },
+        //         ),
+        //         const Divider(),
+        //         user?.uid == "RIGw9i6U0jXGRqUpdmvHYWLeKkl2"
+        //             ? InkWell(
+        //                 child: const ListTile(
+        //                   leading: SizedBox(),
+        //                   title: Text("Admin Controls"),
+        //                   trailing: Icon(Icons.admin_panel_settings_rounded),
+        //                 ),
+        //                 onTap: () {
+        //                   Navigator.of(drawerContext).push(
+        //                     MaterialPageRoute(
+        //                         builder: (context) => AdminControls()),
+        //                   );
+        //                 },
+        //               )
+        //             : const Divider()
+        //       ],
+        //     ),
+        //   ),
+        // )),
         body: PageView.builder(
           onPageChanged: (page) {
             setState(() {
@@ -183,7 +258,7 @@ class _marketState extends State<market> {
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.all(Radius.circular(100)),
               boxShadow: [
                 BoxShadow(
@@ -200,9 +275,9 @@ class _marketState extends State<market> {
                 tabs: [
                   GButton(
                     gap: gap,
-                    iconActiveColor: Colors.black87,
-                    iconColor: Colors.black,
-                    textColor: Colors.black87,
+                    iconActiveColor: Theme.of(context).colorScheme.secondary,
+                    iconColor: Theme.of(context).colorScheme.secondary,
+                    textColor: Theme.of(context).colorScheme.secondary,
                     backgroundColor: Colors.white.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,
@@ -211,9 +286,9 @@ class _marketState extends State<market> {
                   ),
                   GButton(
                     gap: gap,
-                    iconActiveColor: Colors.black87,
-                    iconColor: Colors.black,
-                    textColor: Colors.black87,
+                    iconActiveColor: Theme.of(context).colorScheme.secondary,
+                    iconColor: Theme.of(context).colorScheme.secondary,
+                    textColor: Theme.of(context).colorScheme.secondary,
                     backgroundColor: Colors.white.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,
@@ -222,9 +297,9 @@ class _marketState extends State<market> {
                   ),
                   GButton(
                     gap: gap,
-                    iconActiveColor: Colors.black87,
-                    iconColor: Colors.black,
-                    textColor: Colors.black87,
+                    iconActiveColor: Theme.of(context).colorScheme.secondary,
+                    iconColor: Theme.of(context).colorScheme.secondary,
+                    textColor: Theme.of(context).colorScheme.secondary,
                     backgroundColor: Colors.white.withOpacity(.2),
                     iconSize: 24,
                     padding: padding,

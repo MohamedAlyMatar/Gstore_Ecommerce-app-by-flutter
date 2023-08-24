@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gstore/ProductList.dart';
 import 'package:gstore/ProductAdd.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 
 import 'ProductDelete.dart';
 import 'ProfileEdit.dart';
@@ -27,11 +29,14 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: MyColors.LightPrimaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             leading: IconButton(
               icon: const Icon(IconData(0xe093,
                   fontFamily: 'MaterialIcons', matchTextDirection: true)),
@@ -39,9 +44,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text(
+            title: Text(
               "Profile Settings",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
             centerTitle: true,
           ),
@@ -61,13 +66,14 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          child: const ListTile(
+                          child: ListTile(
                             // leading: SizedBox(),
+                            tileColor: Theme.of(context).colorScheme.primary,
                             title: Text(
                               "Edit Profile",
-                              style: TextStyle(color: Colors.black87),
+                              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                             ),
-                            trailing: Icon(Icons.edit),
+                            trailing: Icon(Icons.edit, color: Theme.of(context).colorScheme.secondary,),
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -78,17 +84,14 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          child: Container(
-                            color: Colors.red,
-                            // Set the background color to red
-                            child: const ListTile(
-                              // leading: SizedBox(),
-                              title: Text(
-                                "Delete Account",
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              trailing: Icon(Icons.delete_forever),
+                          child: ListTile(
+                            // leading: SizedBox(),
+                            tileColor: Colors.red,
+                            title: Text(
+                              "Delete Account",
+                              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                             ),
+                            trailing: Icon(Icons.delete_forever, color: Theme.of(context).colorScheme.secondary,),
                           ),
                           onTap: () {
                             showDialog(
@@ -101,14 +104,14 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(context, 'Cancel'),
-                                    child: const Text("Cancel"),
+                                    child: Text("Cancel", style: TextStyle(color: Theme.of(context).colorScheme.tertiary),),
                                   ),
                                   TextButton(
                                     onPressed: () {
                                       Navigator.pop(context);
                                       deleteUser();
                                     },
-                                    child: const Text("DELETE"),
+                                    child: const Text("DELETE", style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
                                   ),
                                 ],
                               ),

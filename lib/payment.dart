@@ -52,11 +52,11 @@ class _paymentState extends State<payment> {
                       const SizedBox(
                         height: 20,
                       ),
-                      w.entryField2("Card Number", "16 digit", false,
+                      w.entryField2(Theme.of(context).colorScheme, "Card Number", "16 digit", false,
                           const Icon(Icons.credit_card)),
                       w.entryField2(
-                          "Card Name", "name", false, const Icon(Icons.person)),
-                      w.entryField2("Address", "your address", false,
+                          Theme.of(context).colorScheme, "Card Name", "name", false, const Icon(Icons.person)),
+                      w.entryField2(Theme.of(context).colorScheme, "Address", "your address", false,
                           const Icon(Icons.gps_fixed_rounded)),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

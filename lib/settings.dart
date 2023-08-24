@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/ThemeManager.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 
 class settings extends StatefulWidget {
   settings({Key? key}) : super(key: key);
@@ -9,25 +12,39 @@ class settings extends StatefulWidget {
 }
 
 class _settingsState extends State<settings> {
+  bool isDarkMode = false;
+
+  void toggleTheme() {
+    setState(() {
+      isDarkMode = !isDarkMode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: MyColors.LightPrimaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             leading: IconButton(
-              icon: const Icon(IconData(0xe093,
-                  fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              icon: Icon(
+                IconData(0xe093,
+                    fontFamily: 'MaterialIcons', matchTextDirection: true),
+                color: Theme.of(context).colorScheme.secondary,
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text(
+            title: Text(
               "Settings",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
             centerTitle: true,
           ),
@@ -47,47 +64,44 @@ class _settingsState extends State<settings> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          child: const ListTile(
-                              // leading: SizedBox(),
-                              title: Text(
-                            "Option 1",
-                            style: TextStyle(color: Colors.black87),
-                          )
-                              // trailing: Icon(Icons.hail_rounded),
-                              ),
-                          onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => market()));
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: InkWell(
-                          child: const ListTile(
-                              // leading: SizedBox(),
-                              title: Text(
-                            "Option 2",
-                            style: TextStyle(color: Colors.black87),
-                          )
-                              // trailing: Icon(Icons.hail_rounded),
-                              ),
-                          onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(
-                            //     builder: (context) => market()));
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: InkWell(
-                          child: const ListTile(
-                            // leading: SizedBox(),
+                          child: ListTile(
+                            tileColor: Theme.of(context).colorScheme.primary,
                             title: Text(
-                              "Switch to Dark Mode",
-                              style: TextStyle(color: Colors.black87),
+                              ThemeManager.isDarkMode
+                                  ? 'Switch to Light Mode'
+                                  : 'Switch to Dark Mode',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
                             ),
-                            trailing: Icon(Icons.dark_mode_rounded),
+                            trailing: Icon(
+                              ThemeManager.isDarkMode
+                                  ? Icons.light_mode_rounded
+                                  : Icons.dark_mode_rounded,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                          onTap: () {
+                            ThemeManager.toggleTheme(context); // Toggle the theme
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: InkWell(
+                          child: ListTile(
+                            // leading: SizedBox(),
+                            tileColor: Theme.of(context).colorScheme.primary,
+                            title: Text(
+                              "Option 2",
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                            ),
+                            trailing: Icon(
+                              Icons.keyboard_option_key_rounded,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
                           ),
                           onTap: () {
                             // Navigator.of(context).push(MaterialPageRoute(

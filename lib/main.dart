@@ -4,6 +4,8 @@ import 'package:gstore/SplashScreen.dart';
 import 'package:gstore/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'package:provider/provider.dart';
 import 'auth.dart';
 import 'home.dart';
@@ -32,6 +34,8 @@ void main() async {
 }
 
 class LoadApp extends StatelessWidget {
+  const LoadApp({super.key});
+
   Future<void> initializeApp() async {
     // Simulate an asynchronous task (e.g., Firebase initialization)
     await Future.delayed(const Duration(seconds: 2));
@@ -41,6 +45,9 @@ class LoadApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: FutureBuilder(
         future: initializeApp(),
         builder: (context, snapshot) {

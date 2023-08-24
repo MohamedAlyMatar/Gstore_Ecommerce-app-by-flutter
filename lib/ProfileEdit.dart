@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'auth.dart';
 
 class ProfileEdit extends StatefulWidget {
@@ -78,38 +80,66 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Edit Profile"),
-        backgroundColor: MyColors.LightPrimaryColor,
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextField(
-              controller: displayNameController,
-              decoration: InputDecoration(labelText: 'Display Name'),
-            ),
-            TextField(
-              controller: phoneNumberController,
-              decoration: InputDecoration(labelText: 'Phone Number'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        home: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.background,
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            leading: IconButton(
+              icon: const Icon(IconData(0xe093,
+                  fontFamily: 'MaterialIcons', matchTextDirection: true)),
               onPressed: () {
-                updateProfileInfo(); // Call the method to save changes
+                Navigator.of(context).pop();
               },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: MyColors.LightPrimaryColor,
-              ),
-              child: Text("Save Changes"),
             ),
-          ],
-        ),
-      ),
-    );
+            title: Text(
+              "Edit Profile",
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+            ),
+            centerTitle: true,
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                TextField(
+                  controller: displayNameController,
+                  decoration: InputDecoration(
+                    labelText: 'Display Name',
+                    labelStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
+                  ),
+                ),
+                TextField(
+                  controller: phoneNumberController,
+                  decoration: InputDecoration(
+                    labelText: 'Phone Number',
+                    labelStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary),
+                  ),
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    updateProfileInfo(); // Call the method to save changes
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                  ),
+                  child: Text(
+                    "Save Changes",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }

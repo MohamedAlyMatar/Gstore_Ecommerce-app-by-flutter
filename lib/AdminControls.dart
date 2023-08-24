@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gstore/ProductList.dart';
 import 'package:gstore/ProductAdd.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 
 import 'ProductDelete.dart';
 
@@ -17,21 +19,25 @@ class _AdminControlsState extends State<AdminControls> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        color: Theme.of(context).colorScheme.background,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: MyColors.LightPrimaryColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             leading: IconButton(
-              icon: const Icon(IconData(0xe093,
-                  fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              icon: Icon(IconData(0xe093,
+                  fontFamily: 'MaterialIcons', matchTextDirection: true),color: Theme.of(context).colorScheme.secondary,),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text(
+            title: Text(
               "Admin Controls",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
             centerTitle: true,
           ),
@@ -51,13 +57,14 @@ class _AdminControlsState extends State<AdminControls> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          child: const ListTile(
+                          child: ListTile(
                             // leading: SizedBox(),
+                            tileColor: Theme.of(context).colorScheme.primary,
                             title: Text(
                               "View Products",
-                              style: TextStyle(color: Colors.black87),
+                              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                             ),
-                            trailing: Icon(Icons.list),
+                            trailing: Icon(Icons.list, color: Theme.of(context).colorScheme.secondary,),
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -68,13 +75,14 @@ class _AdminControlsState extends State<AdminControls> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          child: const ListTile(
+                          child: ListTile(
                             // leading: SizedBox(),
+                            tileColor: Theme.of(context).colorScheme.primary,
                             title: Text(
                               "Add Products",
-                              style: TextStyle(color: Colors.black87),
+                              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                             ),
-                            trailing: Icon(Icons.add),
+                            trailing: Icon(Icons.add, color: Theme.of(context).colorScheme.secondary,),
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
@@ -85,13 +93,14 @@ class _AdminControlsState extends State<AdminControls> {
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: InkWell(
-                          child: const ListTile(
+                          child: ListTile(
                             // leading: SizedBox(),
+                            tileColor: Theme.of(context).colorScheme.primary,
                             title: Text(
                               "Delete Products",
-                              style: TextStyle(color: Colors.black87),
+                              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
                             ),
-                            trailing: Icon(Icons.delete_forever),
+                            trailing: Icon(Icons.delete_forever, color: Theme.of(context).colorScheme.secondary,),
                           ),
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(

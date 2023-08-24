@@ -4,6 +4,8 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:gstore/ProductClass.dart';
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 
 class Favorites extends ChangeNotifier {
