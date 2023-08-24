@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gstore/theme/dark_theme.dart';
 import 'package:gstore/theme/light_theme.dart';
 
+import 'ProductClass.dart';
 import 'home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,6 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
+    fetchProductsFromFirestore();
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: lightTheme,

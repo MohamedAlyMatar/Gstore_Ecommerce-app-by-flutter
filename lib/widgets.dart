@@ -56,7 +56,7 @@ class MyWidgets {
         ));
   }
 
-  Widget entryField3(String title, String hint, bool isobsecure,
+  Widget entryField3(ColorScheme colorScheme, String title, String hint, bool isobsecure,
       [Icon? entryicon]) {
     return Padding(
         padding: const EdgeInsets.all(10),
@@ -66,7 +66,11 @@ class MyWidgets {
             border: const UnderlineInputBorder(),
             labelText: title,
             hintText: hint,
-            prefixIcon: entryicon,
+            labelStyle: TextStyle(color: colorScheme.tertiary),
+            hintStyle: TextStyle(color: colorScheme.tertiary),
+            prefixIcon: entryicon != null
+                ? Icon(entryicon.icon, color: colorScheme.tertiary)
+                : null,
           ),
         ));
   }
@@ -82,7 +86,7 @@ class MyWidgets {
             leading: entryicon,
             title: Text(
               text,
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             // trailing: ,
           ),

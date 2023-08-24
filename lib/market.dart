@@ -124,7 +124,7 @@ class _marketState extends State<market> {
                   },
                 ),
                 const Divider(),
-                user?.uid == "RIGw9i6U0jXGRqUpdmvHYWLeKkl2"
+                user?.uid == "X7GLcxcQbdScSBGXl2LxOexN2UI2"
                     ? ListTile(
                         // tileColor: Theme.of(context).colorScheme.secondary,
                         leading: Icon(Icons.admin_panel_settings_rounded,

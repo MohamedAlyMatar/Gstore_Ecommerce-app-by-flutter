@@ -16,7 +16,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final User? user = Auth().currentUser;
+
   runApp(
     MultiProvider(
       providers: [
@@ -34,13 +34,13 @@ void main() async {
 }
 
 class LoadApp extends StatelessWidget {
-  const LoadApp({super.key});
+   LoadApp({super.key});
 
   Future<void> initializeApp() async {
     // Simulate an asynchronous task (e.g., Firebase initialization)
     await Future.delayed(const Duration(seconds: 2));
   }
-
+  final User? user = Auth().currentUser;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,7 +54,7 @@ class LoadApp extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SplashScreen(); // Display loading screen while waiting
           } else {
-            return home(); // Replace with your main app screen
+            return user != null ? market() : home(); // Replace with your main app screen
           }
         },
       ),

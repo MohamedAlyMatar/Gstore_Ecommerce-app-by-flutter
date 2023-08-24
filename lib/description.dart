@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 
 import 'ProductClass.dart';
 
@@ -20,7 +22,7 @@ class _descriptionState extends State<description> {
       padding: const EdgeInsets.all(5),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 12),
+        style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.secondary),
       ),
     );
   }
@@ -31,6 +33,9 @@ class _descriptionState extends State<description> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme,
+      darkTheme: darkTheme,
+      themeMode: ThemeMode.system,
       home: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -43,17 +48,22 @@ class _descriptionState extends State<description> {
                 padding: EdgeInsets.all(8.0),
                 child: InkWell(
                   child: ListTile(
+                      // tileColor: Theme.of(context).colorScheme.primary,
                       leading: IconButton(
-                        icon: const Icon(IconData(0xe093,
-                            fontFamily: 'MaterialIcons',
-                            matchTextDirection: true)),
+                        icon: Icon(
+                          const IconData(0xe093,
+                              fontFamily: 'MaterialIcons',
+                              matchTextDirection: true),
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                       ),
-                      title: const Text(
+                      title: Text(
                         "Back to store",
-                        style: TextStyle(color: Colors.black87),
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.tertiary),
                       )
                       // trailing: Icon(Icons.hail_rounded),
                       ),
@@ -82,10 +92,11 @@ class _descriptionState extends State<description> {
               ),
               Card(
                 child: ExpansionTile(
-                  leading: const Icon(Icons.description),
-                  title: const Text(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  leading: Icon(Icons.description, color: Theme.of(context).colorScheme.secondary,),
+                  title: Text(
                     "Description",
-                    style: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                    style: TextStyle(color: Theme.of(context).colorScheme.secondary, fontSize: 15),
                   ),
                   children: [
                     _textField("Official name: Google ${widget.product.name}"),

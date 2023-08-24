@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 
 class help extends StatefulWidget {
   help({Key? key}) : super(key: key);
@@ -17,7 +19,7 @@ class _helpState extends State<help> {
       padding: const EdgeInsets.all(5),
       child: Text(
         text,
-        style: const TextStyle(fontSize: 15),
+        style: TextStyle(fontSize: 15, color: Theme.of(context).colorScheme.tertiary),
       ),
     );
   }
@@ -26,20 +28,25 @@ class _helpState extends State<help> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
+        home: Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: MyColors.LightPrimaryColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
-          icon: const Icon(IconData(0xe093,
-              fontFamily: 'MaterialIcons', matchTextDirection: true)),
+          icon: Icon(IconData(0xe093,
+              fontFamily: 'MaterialIcons', matchTextDirection: true), color: Theme.of(context).colorScheme.secondary,),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text(
+        title: Text(
           "Help Desk",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.secondary),
         ),
         centerTitle: true,
       ),
@@ -75,6 +82,6 @@ class _helpState extends State<help> {
           ),
         ),
       ),
-    );
+        ) );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gstore/classes.dart';
+import 'package:gstore/theme/dark_theme.dart';
+import 'package:gstore/theme/light_theme.dart';
 import 'package:gstore/widgets.dart';
 import 'package:provider/provider.dart';
 
@@ -18,21 +20,24 @@ class _paymentState extends State<payment> {
     final bucket = Provider.of<Bucket>(context);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        themeMode: ThemeMode.system,
         home: Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             elevation: 0,
-            backgroundColor: MyColors.LightAccentColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             leading: IconButton(
-              icon: const Icon(IconData(0xe093,
-                  fontFamily: 'MaterialIcons', matchTextDirection: true)),
+              icon: Icon(const IconData(0xe093,
+                  fontFamily: 'MaterialIcons', matchTextDirection: true), color: Theme.of(context).colorScheme.secondary,),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
-            title: const Text(
+            title: Text(
               "Payment",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Theme.of(context).colorScheme.secondary),
             ),
             centerTitle: true,
           ),
@@ -65,6 +70,7 @@ class _paymentState extends State<payment> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: w.entryField3(
+                                Theme.of(context).colorScheme,
                                 "City",
                                 "your city",
                                 false,
@@ -75,6 +81,7 @@ class _paymentState extends State<payment> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: w.entryField3(
+                                Theme.of(context).colorScheme,
                                 "State",
                                 "your state",
                                 false,
@@ -85,6 +92,7 @@ class _paymentState extends State<payment> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: w.entryField3(
+                                Theme.of(context).colorScheme,
                                 "Zip Code",
                                 "your zip code",
                                 false,

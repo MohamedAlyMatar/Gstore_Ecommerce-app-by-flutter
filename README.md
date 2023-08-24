@@ -8,7 +8,7 @@
 
 <ul>
 <li>An icon for the app</li>
-<li>dark mode (to be done)</li>
+<li>dark mode</li>
 <li>loading screen</li>
 <li>sign-in and register features</li>
 <li>search bar for the products</li>
