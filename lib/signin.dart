@@ -85,8 +85,8 @@ class _signInState extends State<signIn> {
                           Builder(
                             builder: (BuildContext context) {
                               return w.entryField1(
-                                  "Username",
-                                  "Enter your name",
+                                  "Email",
+                                  "Enter your email",
                                   false,
                                   _controllerEmail,
                                   const Icon(Icons.email),

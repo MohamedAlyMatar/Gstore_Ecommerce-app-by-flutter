@@ -91,6 +91,7 @@ class _descriptionState extends State<description> {
                 height: 20,
               ),
               Card(
+                color: Theme.of(context).colorScheme.primary,
                 child: ExpansionTile(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   leading: Icon(Icons.description, color: Theme.of(context).colorScheme.secondary,),
